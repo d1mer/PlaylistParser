@@ -1,0 +1,99 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+
+# -------------------------------
+# JetBrains Rider
+# -------------------------------
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+.idea/.idea.*/**
+.idea/.rider.*/**
+.swp
+.swo
+
+# Rider/Resharper (если используется)
+_ReSharper.Caches/
+
+# -------------------------------
+# Visual Studio / .NET
+# -------------------------------
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.csproj.user
+*.sln.docstates
+*.sln.ide
+*.tss
+*.cache
+*.dbmdl
+*.orig
+*.log
+
+# -------------------------------
+# Build outputs
+# -------------------------------
+bin/
+obj/
+out/
+*.pdb
+*.exe
+*.dll
+*.app
+*.ipa
+*.apk
+*.ap_
+
+# -------------------------------
+# Xamarin / MAUI specific
+# -------------------------------
+*.db
+*.db-shm
+*.db-wal
+*.lock.json
+
+# -------------------------------
+# Android / Gradle
+# -------------------------------
+.gradle/
+
+# -------------------------------
+# iOS / Xcode
+# -------------------------------
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcworkspace
+
+# -------------------------------
+# macOS
+# -------------------------------
+.DS_Store
+
+# -------------------------------
+# Windows
+# -------------------------------
+Thumbs.db
+
+# -------------------------------
+# Environment and secrets
+# -------------------------------
+appsettings*.json
+secrets.json
+.env
+.env.*
+
+# -------------------------------
+# Temporary files
+# -------------------------------
+*.tmp
+*.bak
