@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using PlaylistParser.Interfaces;
 using PlaylistParser.Services;
 
@@ -8,14 +10,19 @@ public class PlaylistInfoViewModel : ViewModelBase,  INavigationAware
 {
     public PlaylistInfoViewModel(NavigationService navigationService) : base(navigationService)
     {
-        
+        GoBackCommand = new RelayCommand(OnGoBack);
     }
     
+
     #region -- Public Properties --
 
-    public bool IsErrorTextVisible { get; set; } = true;
+    public bool IsErrorTextVisible { get; set; } = false;
+    
+    public bool IsLoaderVisible { get; set; } = true;
     
     public string Url { get; set; }
+    
+    public ICommand GoBackCommand { get; }
 
     #endregion
     
@@ -29,5 +36,14 @@ public class PlaylistInfoViewModel : ViewModelBase,  INavigationAware
         }
     }
 
+    #endregion
+    
+    #region -- Private helpers --
+
+    private void OnGoBack()
+    {
+        NavigationService.GoBack();
+    }
+    
     #endregion
 }

@@ -3,17 +3,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:PlaylistParser.ViewModels"
+             xmlns:gif="using:Avalonia.Labs.Gif"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PlaylistParser.Views.PlaylistInfoView"
              x:DataType="vm:PlaylistInfoViewModel">
     
     <Grid HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
+          VerticalAlignment="Stretch"
+          RowDefinitions="0.07*,*">
         
-        <TextBlock HorizontalAlignment="Center"
+        <Button Grid.Row="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="10,0"
+                Background="Transparent"
+                Command="{Binding Path=GoBackCommand}">
+            
+            <Image Source="../Assets/arrow_left.png"
+                   Width="16"
+                   Height="16" />
+        </Button>
+        
+        <TextBlock Grid.Row="1"
+                   HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Text="Something went wrong, data not received"
-                   FontSize="24"/>
+                   FontSize="24"
+                   IsVisible="{Binding Path=IsErrorTextVisible}"/>
+        
+        <gif:GifImage Grid.Row="1"
+                      Source="avares://PlaylistParser/Assets/loader.gif"
+                      Width="50"
+                      Height="50"
+                      IsEnabled="{Binding Path=IsLoaderVisible}"
+                      IsVisible="{Binding Path=IsLoaderVisible}"/>
+        
     </Grid>
     
 </UserControl>
