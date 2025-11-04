@@ -1,14 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PlaylistParser.Views;
+using PlaylistParser.Services;
 
 namespace PlaylistParser.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty] private object currentView;
-    public MainWindowViewModel()
+    [ObservableProperty] private object currentViewModel;
+    public MainWindowViewModel(NavigationService  navigationService) : base(navigationService)
     {
-        var urlViewModel = new UrlViewModel();
-        CurrentView = new UrlView {DataContext = urlViewModel};
+        NavigationService.Initialize(vm => CurrentViewModel = vm);
+        NavigationService.NavigateTo<UrlViewModel>();
     }
 }

@@ -1,9 +1,12 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Avalonia.Markup.Xaml;
+using PlaylistParser.Services;
 using PlaylistParser.ViewModels;
 using PlaylistParser.Views;
 
@@ -11,9 +14,11 @@ namespace PlaylistParser;
 
 public partial class App : Application
 {
+    public static IServiceProvider Services { get; private set; }
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        ConfigureServices();
     }
 
     public override void OnFrameworkInitializationCompleted()
@@ -25,7 +30,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
             };
         }
 
@@ -43,5 +48,18 @@ public partial class App : Application
         {
             BindingPlugins.DataValidators.Remove(plugin);
         }
+    }
+
+    private void ConfigureServices()
+    {
+        var services = new ServiceCollection();
+
+        services.AddSingleton<NavigationService>();
+        
+        services.AddTransient<MainWindowViewModel>();
+        services.AddTransient<UrlViewModel>();
+        services.AddTransient<PlaylistInfoViewModel>();
+        
+        Services = services.BuildServiceProvider();
     }
 }

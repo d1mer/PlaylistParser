@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using PlaylistParser.Services;
 
 namespace PlaylistParser.ViewModels;
 
 public class UrlViewModel : ViewModelBase
 {
-    public UrlViewModel()
+    public UrlViewModel(NavigationService navigationService) : base(navigationService)
     {
         GetInfoCommand = new RelayCommand(OnGetInfo);
     }
@@ -24,7 +26,10 @@ public class UrlViewModel : ViewModelBase
     {
         if (!string.IsNullOrWhiteSpace(Url))
         {
-            
+            NavigationService.NavigateTo<PlaylistInfoViewModel>(new Dictionary<string, object>
+            {
+                {"url", Url}
+            });
         }
     }
 
