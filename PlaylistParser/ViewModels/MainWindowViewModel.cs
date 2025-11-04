@@ -1,6 +1,14 @@
-﻿namespace PlaylistParser.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PlaylistParser.Views;
+
+namespace PlaylistParser.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    [ObservableProperty] private object currentView;
+    public MainWindowViewModel()
+    {
+        var urlViewModel = new UrlViewModel();
+        CurrentView = new UrlView {DataContext = urlViewModel};
+    }
 }

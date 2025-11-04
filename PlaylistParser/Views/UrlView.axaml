@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:PlaylistParser.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PlaylistParser.Views.UrlView"
+             x:DataType="vm:UrlViewModel">
+    
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="20">
+        
+        <TextBox MinWidth="300"
+                 MaxWidth="350"
+                 CornerRadius="10"
+                 BorderThickness="1"
+                 BorderBrush="Coral" 
+                 Watermark="playlist URL..."
+                 Text="{Binding Path=Url, Mode=OneWayToSource}"/>
+        
+        <Button Content="Get Info"
+                CornerRadius="7"
+                BorderThickness="0"
+                Background="CornflowerBlue"
+                Padding="10,5"
+                Command="{Binding GetInfoCommand}"/>
+        
+    </StackPanel>
+    
+</UserControl>
