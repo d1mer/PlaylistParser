@@ -1,21 +1,26 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PlaylistParser.Interfaces;
 using PlaylistParser.Services;
+using PlaylistParser.Services.PlaylistService;
 
 namespace PlaylistParser.ViewModels;
 
 public class PlaylistInfoViewModel : ViewModelBase,  INavigationAware
 {
-    public PlaylistInfoViewModel(NavigationService navigationService) : base(navigationService)
+    private readonly IPlaylistService  _playlistService;
+    public PlaylistInfoViewModel(NavigationService navigationService, IPlaylistService playlistService) : base(navigationService)
     {
+        _playlistService = playlistService;
         GoBackCommand = new RelayCommand(OnGoBack);
     }
     
 
     #region -- Public Properties --
-
+    
     public bool IsErrorTextVisible { get; set; } = false;
     
     public bool IsLoaderVisible { get; set; } = true;
@@ -33,6 +38,11 @@ public class PlaylistInfoViewModel : ViewModelBase,  INavigationAware
         if (parameters != null && parameters.TryGetValue("url", out object url))
         {
             Url = url.ToString();
+            LoadPlaylist();
+        }
+        else
+        {
+            ShowDataError();
         }
     }
 
@@ -43,6 +53,21 @@ public class PlaylistInfoViewModel : ViewModelBase,  INavigationAware
     private void OnGoBack()
     {
         NavigationService.GoBack();
+    }
+
+    private void ShowDataError()
+    {
+        IsLoaderVisible = false;
+        IsErrorTextVisible = true;
+
+        OnPropertyChanged(nameof(IsLoaderVisible));
+        OnPropertyChanged(nameof(IsErrorTextVisible));
+    }
+
+    private async Task LoadPlaylist()
+    {
+        await _playlistService.GetPlaylistAsync(Url);
+        ShowDataError();
     }
     
     #endregion

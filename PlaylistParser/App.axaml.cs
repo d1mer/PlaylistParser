@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Avalonia.Markup.Xaml;
 using PlaylistParser.Services;
+using PlaylistParser.Services.PlaylistService;
 using PlaylistParser.ViewModels;
 using PlaylistParser.Views;
 
@@ -55,6 +56,7 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         services.AddSingleton<NavigationService>();
+        services.AddTransient<IPlaylistService, PlaylistService>();
         
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<UrlViewModel>();
