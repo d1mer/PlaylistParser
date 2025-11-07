@@ -109,6 +109,7 @@ public class PlaylistService : IPlaylistService
                         Name = trackNode.GetAttributeValue("primary-text", ""),
                         Artist = trackNode.GetAttributeValue("secondary-text-1", ""),
                         Album = trackNode.GetAttributeValue("secondary-text-2", ""),
+                        ImageUrl = trackNode.GetAttributeValue("image-src", ""),
                     };
                     
                     var durationNode =  trackNode.SelectSingleNode(".//div[@class='col4']//span");

@@ -9,4 +9,6 @@ public class Track
     public string Album { get; set; } = string.Empty;
     
     public string Duration { get; set; } = string.Empty;
+
+    public string ImageUrl { get; set; }
 }
